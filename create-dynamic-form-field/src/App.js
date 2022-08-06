@@ -1,24 +1,21 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
+
 const App = () => {
   // State variable to store the value of the input field
-  const [orderField, setOrderField] = useState([
-    { orderName: "", price: "", quantity: "", deliveryDate: "" }
+  const [orderField, setOrderField] = useState([ 
+    { orderName: "", price: "", quantity: "", deliveryDate: ""} 
   ]);
   const [valueErrors, setValueErrors] = useState({});
 
   // Global variable
   let totalPrice = 0;
-  
-  // Function to calculate for a single order
-  const singleOrderPrice = (singleOrder) => {
-    let price =singleOrder.price *singleOrder.quantity;
-    return price;
-  }
 
   // Function of handling order change
     const handleChange = (event, index) => {
-        let newOrderField = [...orderField];
+        const newOrderField = [...orderField];
         newOrderField[index][event.target.name] = event.target.value;
         setOrderField(newOrderField);
     };
@@ -66,7 +63,7 @@ const App = () => {
                 errors.quantity = "Quantity is required";
                 isValid = false;
             }
-            if (order.deliveryDate === "") {
+            if (order.deliveryDate === null) {
                 errors.deliveryDate = "Delivery date is required";
                 isValid = false;
             }
@@ -117,9 +114,10 @@ const App = () => {
 
             <div className="order-detail-subContainer">
               <label htmlFor="deliveryDate"> Delivery Date</label>
-              <input type="text" id="deliveryDate" name="deliveryDate" 
+              <input type="date" id="deliveryDate" name="deliveryDate" 
               value={order.deliveryDate} 
               onChange={event => handleChange(event, index)} />
+             
               <p className="formValueError"> {valueErrors.deliveryDate} </p>
             </div>
 
