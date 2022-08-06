@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 
 const App = () => {
@@ -63,7 +61,7 @@ const App = () => {
                 errors.quantity = "Quantity is required";
                 isValid = false;
             }
-            if (order.deliveryDate === null) {
+            if (order.deliveryDate === "") {
                 errors.deliveryDate = "Delivery date is required";
                 isValid = false;
             }
